@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx expression</title>
+</head>
+<body>
+<div id="app">abc</div>
+
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  
+<script type="text/babel">
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      firstname: 'wang',
+      lastname: 'ding',
+      isLogin: false
+    }
+  }
+
+  getFullName() {
+    return this.state.firstname + ' ' + this.state.lastname;
+  }
+
+  render() {
+    const {firstname, lastname, isLogin} = this.state;
+    return (
+      <div>
+        {/* 1. 运算符表达式 */}
+        <h2>{firstname + ' ' + lastname}</h2>
+        <h2>{20 * 200}</h2>
+
+        {/* 2. 三目运算表达式 */}
+        <h2>{isLogin ? '欢迎回来...' : '请先登录'}</h2>
+
+        {/* 3. 函数调用 */}
+        <h2>{this.getFullName()}</h2>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById('app'));
+
+</script>
+</body>
+</html>

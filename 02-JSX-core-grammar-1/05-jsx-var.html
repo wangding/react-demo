@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>hello world</title>
+</head>
+<body>
+<div id="app">abc</div>
+
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  
+<script type="text/babel">
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      // 可以正常显示
+      name: 'wangding',
+      age:  45,
+      movies: ['abc', 'cba', 'bac'],
+
+      // 不能正常显示
+      test1: null,
+      test2: undefined,
+      test3: true,
+
+      // 对象不能显示
+      friend: {
+        name: 'lisi',
+        age:  34
+      }
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>{this.state.name}</h2>
+        <h2>{this.state.age}</h2>
+        <h2>{this.state.movies}</h2>
+        <h2>{this.state.test1}</h2>
+        <h2>{this.state.test2}</h2>
+        <h2>{this.state.test3}</h2>
+        <h2>{this.state.test3 ? 'hello': null}</h2>
+        <h2>{this.state.test3 && 'world'}</h2>
+        <h2>{this.state.test1 + ''}</h2>
+        <h2>{this.state.test2 + ''}</h2>
+        <h2>{this.state.test3.toString()}</h2>
+        {/* 下面的代码会报错
+        <h2>{this.state.friend}</h2>
+        */}
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById('app'));
+
+</script>
+</body>
+</html>

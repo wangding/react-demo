@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>hello world</title>
+</head>
+<body>
+<div id="app">abc</div>
+
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  
+<script type="text/babel">
+let message = 'hello world';
+
+function btnClick() {
+  message = 'hello react';
+  render();
+}
+
+function render() {
+  ReactDOM.render(<div><h2>{message}</h2><button onClick={btnClick}>change text</button></div>, document.getElementById('app'));
+}
+
+render();
+</script>
+</body>
+</html>
