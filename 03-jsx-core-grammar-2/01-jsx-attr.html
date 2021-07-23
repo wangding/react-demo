@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx attribute</title>
+</head>
+<body>
+<div id="app">abc</div>
+
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  
+<script type="text/babel">
+class App extends React.Component {
+  getImgSize(url, size) {
+    return url + `?param=${size}y${size}`;
+  }
+
+  constructor() {
+    super();
+    this.state = {
+      title: 'hello world',
+      imgURL: 'http://p1.music.126.net/w8HtRC-TK4ZLFJTMbD16jQ==/109951165307788332.jpg',
+      link: 'http://www.baidu.com',
+      active: true
+    }
+  }
+
+  render() {
+    const { title, imgURL, link, active } = this.state;
+    return (
+      <div>
+        {/* 绑定普通属性 */}
+        <h2 title={title}>我是标题</h2>
+        <img src={this.getImgSize(imgURL, 140)} alt="" />
+        <a href={link} target="_blank">百度一下</a>
+
+        {/* 绑定 class */}
+        <div className="box title">testDIV</div>
+        <div className={"box title " + (active ? "active" : "")}>testDIV</div>
+        <label htmlFor="">theLabel</label>
+
+        {/* 绑定 style */}
+        <div style={{color: "red", fontSize: "50px"}}>testDIV</div>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById('app'));
+
+</script>
+</body>
+</html>

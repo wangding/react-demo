@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx event</title>
+</head>
+<body>
+<div id="app">abc</div>
+
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  
+<script type="text/babel">
+class App extends React.Component {
+  getImgSize(url, size) {
+    return url + `?param=${size}y${size}`;
+  }
+
+  constructor() {
+    super();
+    this.state = {
+      title: 'hello world',
+      imgURL: 'http://p1.music.126.net/w8HtRC-TK4ZLFJTMbD16jQ==/109951165307788332.jpg',
+      link: 'http://www.baidu.com',
+      active: true
+    };
+
+    this.btnClick = this.btnClick.bind(this);
+  }
+
+  render() {
+    const { title, imgURL, link, active } = this.state;
+    return (
+      <div>
+        {/* 方案一，显示绑定 */}
+        {/*
+        <button onClick={this.btnClick.bind(this)}>click me!</button>
+        <button onClick={this.btnClick.bind(this)}>click me!</button>
+        <button onClick={this.btnClick.bind(this)}>click me!</button>
+        <button onClick={this.btnClick.bind(this)}>click me!</button>
+        <button onClick={this.btnClick.bind(this)}>click me!</button>
+        */}
+
+        {/* 方案一改进，在构造函数中绑定一次 */}
+        {/*
+        <button onClick={this.btnClick}>click me!</button>
+        */}
+
+        {/* 方案二，使用箭头函数 */}
+        <button onClick={this.add}>add</button>
+
+        {/* 方案三，使用箭头函数 */}
+        <button onClick={(e) => { this.sub(e) }}>subtract</button>
+      </div>
+    )
+  }
+
+  btnClick() {
+    console.log(this.state.title);
+  }
+
+  // 箭头函数中不绑定 this, 但是会向函数体上一层作用域找 this
+  // 这种方式实现的代码比较简洁
+  add = () => {
+    console.log(this.state.link);
+  }
+
+  sub(e) {
+    console.log(this.state.title, e);
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById('app'));
+
+</script>
+</body>
+</html>
